@@ -1,0 +1,13 @@
+<div class="header">
+  <ul class="inner">
+    <li *ngFor="let item of menu">
+      <a [routerLink]=[item.url] routerLinkActive="router-link-active" [class]="item.class" *ngIf="!auth.loggedIn()">{{ item.name | titlecase }}</a>
+    </li>
+    <li *ngFor="let item of menuAdmin">
+      <a [routerLink]=[item.url] routerLinkActive="router-link-active" [class]="item.class" *ngIf="auth.loggedIn()">{{ item.name | titlecase }}</a>
+    </li>
+    <li style="position: absolute;right: 0;">
+      <a *ngIf="auth.loggedIn()" (click)="auth.logoutUser()" style="cursor: pointer;">Logout</a>
+    </li>
+  </ul>
+</div>

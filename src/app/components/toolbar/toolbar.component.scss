@@ -1,0 +1,33 @@
+$BACKGROUNDTOOLBAR: transparent;
+
+.toolbar {
+  height: 45px;
+  color: #fff;
+  .sidenav-toggle {
+    display: none;
+    padding: 0;
+    margin: 8px;
+    min-width: 56px;
+    border: none;
+    outline-width: 0px;
+    background-color: transparent;
+    @media (max-width: 720px) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon-menu {
+      font-size: 30px;
+      width: 56px;
+      height: 56px;
+      line-height: 56px;
+      background-color: $BACKGROUNDTOOLBAR;
+      color: white;
+      &:hover {
+        cursor: pointer;
+        background: radial-gradient(black, transparent);
+        border-radius: 50%;
+      }
+    }
+  }
+}

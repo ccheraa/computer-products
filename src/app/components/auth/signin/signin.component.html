@@ -1,0 +1,31 @@
+<mat-card class="card">
+  <mat-card-title>Connection</mat-card-title>
+  <mat-card-content>
+    <form class="signin-form" [formGroup]="signInForm" novalidate (ngSubmit)="onSignIn()">
+      <div *ngFor="let item of form">
+        <div [ngSwitch]="item.type">
+          <div *ngSwitchCase="'textBox'">
+            <mat-form-field class="full-width">
+              <input
+                matInput
+                [type]="item.inputType"
+                [name]="item.label"
+                [placeholder]="'Enter your ' + item.label"
+                formControlName="{{item.label}}"
+                autofocus
+              >
+              <mat-error *ngIf="isValid(item.label)">{{item.error}}</mat-error>
+              <mat-icon matSuffix [attr.aria-label]="item.icon + ' icon'">{{item.icon}}</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button type="submit" mat-raised-button color="warn" [disabled]=signInForm.invalid>
+          <mat-icon aria-label="Account icon" style="margin-right: 2px;">account_circle</mat-icon>
+          <span>Create my account</span>
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

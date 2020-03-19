@@ -1,0 +1,21 @@
+@import "../../styles/shadow";
+@import "../../styles/form";
+
+.card {
+  @include shadow(#f1efef, black);
+  .invoice-form {
+    @include form(150px, auto, 100%);
+    .btn-row {
+      button {
+        margin-right: 6px;
+      }
+      mat-icon {
+        margin-right: 2px;
+        color: black;
+      }
+      span {
+        color: black;
+      }
+    }
+  }
+}

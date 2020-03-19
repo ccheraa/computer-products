@@ -1,0 +1,8 @@
+@mixin form($min-width, $max-width, $width) {
+  min-width: $min-width;
+  max-width: $max-width;
+  width: $width;
+  .full-width {
+    width: $width;
+  }
+}

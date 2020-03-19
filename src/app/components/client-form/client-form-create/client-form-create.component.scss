@@ -1,0 +1,40 @@
+.client-create-toolbar {
+  background-color: #f44336;
+  .title-dialog {
+    width: 96%;
+    color: #d3d3d3;
+  }
+  .btn-dialog-close {
+    padding: 0;
+    width: 40px;
+    min-width: 0 !important;
+    height: 40px;
+    background-color: #fff;
+  }
+}
+
+.client-form-create {
+  background-color: #e2dddd;
+  mat-grid-tile {
+    .controles-container {
+      padding: 6%;
+      width: 100%;
+      .full-width {
+        width: 100%;
+      }
+      .add-bottom-padding {
+        padding-bottom: 10px;
+        .mat-radio-button {
+          margin-left: 6px;
+        }
+      }
+      .button-row button,
+      .button-row a {
+        margin-right: 8px;
+      }
+    }
+    .controles-container > * {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+<mat-card class="card">
+  <mat-card-title>Create your account</mat-card-title>
+  <mat-card-content>
+    <form class="signup-form" [formGroup]="signUpForm" novalidate (ngSubmit)="onSignUp()">
+      <mat-form-field *ngFor="let item of form" class="full-width">
+        <input matInput [type]="item.type" [placeholder]="'Enter your ' + item.label" formControlName="{{item.label}}">
+        <mat-icon matSuffix [attr.aria-label]="item.icon + ' icon'">{{item.icon}}</mat-icon>
+        <mat-error *ngIf="isValid(item.label)">{{item.error}}</mat-error>
+      </mat-form-field>
+      <div class="btn-row">
+        <button type="submit" mat-raised-button color="warn" [disabled]=signUpForm.invalid>
+          <mat-icon aria-label="Account icon" style="margin-right: 2px;">account_circle</mat-icon>
+          <span>Create my account</span>
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

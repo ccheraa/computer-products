@@ -1,0 +1,17 @@
+@import "../../../styles/shadow";
+@import "../../../styles/form";
+
+.card {
+  @include shadow(#f1efef, black);
+  .signup-form {
+    @include form(150px, auto, 100%);
+    .btn-row {
+      mat-icon {
+        color: black;
+      }
+      span {
+        color: black;
+      }
+    }
+  }
+}
