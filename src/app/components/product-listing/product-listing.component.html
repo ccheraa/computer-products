@@ -1,65 +1,60 @@
 <mat-card class="card">
-  <mat-card-title>Customer</mat-card-title>
+  <mat-card-title>Product</mat-card-title>
   <mat-toolbar>
-    <div class="client-button-row">
+    <div class="product-button-row">
       <button
         mat-raised-button
         color="warn"
-        (click)="onCreateClient()"
+        (click)="onCreateProduct()"
         [disabled]=false>
         <mat-icon aria-placeholder="placeholder" aria-label="Add icon" style="margin-right: 2px;">add</mat-icon>
         <span>Create</span>
       </button>
     </div>
-    <mat-form-field class="filter-form-field" floatLabel="never">
-      <input matInput [(ngModel)]="filterKey" (keyup)="applyFilter($event.target.value)" autocomplete="off" placeholder="Filter" autofocus>
+    <mat-form-field class="search-form-field">
+      <input matInput type="text" placeholder="Filter" autocomplete="off" [(ngModel)]="searchProduct" (keyup)="applyFilter($event.target.value)" autofocus>
       <button
         mat-button
         matSuffix
         mat-icon-button
         aria-label="Clear"
-        *ngIf="filterKey"
+        *ngIf="searchProduct"
         (click)="onFilterClear()">
         <mat-icon aria-label="Close icon">close</mat-icon>
       </button>
     </mat-form-field>
   </mat-toolbar>
-  <div class="table-client mat-elevation-z8">
+  <div class="table-product mat-elevation-z8">
     <mat-table #table [dataSource]="dataSource" matSort>
-      <ng-container matColumnDef="clientCode">
-        <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
-        <mat-cell *matCellDef="let client"> {{client.clientCode | uppercase}} </mat-cell>
+      <ng-container matColumnDef="productCode">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Code </mat-header-cell>
+        <mat-cell *matCellDef="let product"> {{ product.productCode }} </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-        <mat-cell *matCellDef="let client"> {{client.name | titlecase}} </mat-cell>
+      <ng-container matColumnDef="definition">
+        <mat-header-cell *matHeaderCellDef> Definition </mat-header-cell>
+        <mat-cell *matCellDef="let product"> {{ product.definition }} </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="email">
-        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
-        <mat-cell *matCellDef="let client"> {{client.email}} </mat-cell>
+      <ng-container matColumnDef="category">
+        <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
+        <mat-cell *matCellDef="let product"> {{ product.category }} </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="mobile">
-        <mat-header-cell *matHeaderCellDef> Mobile </mat-header-cell>
-        <mat-cell *matCellDef="let client"> {{client.mobile}} </mat-cell>
+      <ng-container matColumnDef="quantity">
+        <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
+        <mat-cell *matCellDef="let product"> {{ product.quantity }} </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="gender">
-        <mat-header-cell *matHeaderCellDef> Gender </mat-header-cell>
-        <mat-cell *matCellDef="let client"> {{client.gender}} </mat-cell>
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+        <mat-cell *matCellDef="let product"> {{ product.price }} DA </mat-cell>
       </ng-container>
 
-        <ng-container matColumnDef="city">
-        <mat-header-cell *matHeaderCellDef> City </mat-header-cell>
-        <mat-cell *matCellDef="let client"> {{client.city}} </mat-cell>
+      <ng-container matColumnDef="photo">
+        <mat-header-cell *matHeaderCellDef> Photo </mat-header-cell>
+        <mat-cell *matCellDef="let product"> {{ product.file }} </mat-cell>
       </ng-container>
-
-      <!-- <ng-container matColumnDef="creation">
-        <mat-header-cell *matHeaderCellDef> Creation </mat-header-cell>
-        <mat-cell *matCellDef="let client"> {{client.hireDate | date}} </mat-cell>
-      </ng-container> -->
 
       <ng-container matColumnDef="action">
         <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
@@ -74,7 +69,7 @@
             mat-icon-button
             color="warn"
             (click)="onDelete(row._id)">
-            <mat-icon>delete_outline</mat-icon>
+            <mat-icon>delete</mat-icon>
           </button>
         </mat-cell>
       </ng-container>
@@ -85,7 +80,7 @@
           <span class="loading-data"></span>
         </mat-footer-cell>
       </ng-container>
-
+      
       <ng-container matColumnDef="noData">
         <mat-footer-cell *matFooterCellDef aria-colspan="6">
           <span class="no-data">No data.</span>

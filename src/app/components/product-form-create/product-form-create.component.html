@@ -1,0 +1,58 @@
+<mat-toolbar class="product-create-toolbar">
+  <span class="title-dialog">New product</span>
+  <span class="fill-remaining-space"></span>
+  <button mat-stroked-button class="btn-dialog-close" (click)="onClose()" tabindex="-1">
+    <mat-icon aria-label="Clear icon">clear</mat-icon>
+  </button>
+</mat-toolbar>
+
+<form class="product-form-create" [formGroup]="productCreateForm" (ngSubmit)="onCreateProduct()" enctype="multipart/form-data">
+  <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field class="full-width" *ngFor="let item of inputRowTop">
+          <input matInput [type]="item.type" [placeholder]="'Enter your ' + item.placeholder" formControlName="{{item.control}}">
+          <mat-icon matSuffix [attr.aria-label]="item.icon + ' icon'">{{item.icon}}</mat-icon>
+          <mat-error>{{item.error}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Category</mat-label>
+          <mat-select placeholder="Enter your category" formControlName="category">
+            <mat-option *ngFor="let categoryList of category.array" [value]="categoryList">
+              {{categoryList.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Definition</mat-label>
+          <textarea matInput placeholder="Ex. 100 Main St" formControlName="definition">1600 Amphitheatre Pkwy</textarea>
+          <mat-error>Definition is required</mat-error>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field class="full-width" *ngFor="let item of inputRowBottom">
+          <input matInput [type]="item.type" [placeholder]="'Enter your ' + item.placeholder" formControlName="{{item.control}}" min="0">
+          <mat-icon matSuffix [attr.aria-label]="item.icon + ' icon'">{{item.icon}}</mat-icon>
+          <mat-error>{{item.error}}</mat-error>
+        </mat-form-field>
+
+        <div class="full-width form-group-file">
+          <label for="imageUrl">Image</label>
+          <!-- <input type="file" name="image" id="imageUrl" (change)="uploadImage($event)" formControlName="imageUrl"> -->
+          <!-- <img *ngIf="imageUrl" [src]="imageUrl" [alt]="imageUrl" style="max-width:60px;"> -->
+          <input type="file" name="file" id="file" (change)="uploadImage($event)" formControlName="file">
+        </div>
+
+        <div class="button-row">
+          <button mat-raised-button color="accent" type="submit" [disabled]="productCreateForm.invalid">Save</button>
+          <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+        </div>
+      </div>
+    </mat-grid-tile>    
+  </mat-grid-list>
+</form>

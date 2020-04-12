@@ -1,21 +1,28 @@
 var express = require('express');
 var router = express.Router();
 
+const invoiceController = require('../controllers/invoices.controller');
+
 let Invoice = require('../api/models/invoice.model');
 
 // GET Invoice page...
 router.route('/').get((req, res) => {
-  const { duration, username, description } = req.query;
+  const { invoiceCode, clientCode, productCode, designation } = req.query;
   const query = {};
-  if (duration) {
-    query.duration = duration;
+
+  if (invoiceCode) {
+    query.invoiceCode = RegExp(invoiceCode, 'i');
   }
-  if (username) {
-    query.username = RegExp(username, 'i');
+  if (clientCode) {
+    query.clientCode = RegExp(clientCode, 'i');
   }
-  if (description) {
-    query.description = RegExp(description, 'i');
+  if (productCode) {
+    query.productCode = RegExp(productCode, 'i');
   }
+  if (designation) {
+    query.designation = RegExp(designation, 'i');
+  }
+
   Invoice.find(query)
     .then(invoice => res.json(invoice))
     .catch(err => res.status(400).json('Error: ' + err));
@@ -30,15 +37,23 @@ router.route('/:id').get((req, res) => {
 
 // ADD Invoice...
 router.route('/add').post((req, res) => {
-  const username = req.body.username;
-  const description = req.body.description;
-  const duration = Number(req.body.duration);
+  const invoiceCode = req.body.invoiceCode;
+  const clientCode = req.body.clientCode;
+  const productCode = req.body.productCode;
+  const designation = req.body.designation;
+  const amount = Number(req.body.amount);
+  const unitPrice = Number(req.body.unitPrice);
+  const total = parseInt(req.body.amount) * parseInt(req.body.unitPrice);
   const date = Date.parse(req.body.date);
 
   const newInvoice = new Invoice({
-    username,
-    description,
-    duration,
+    invoiceCode,
+    clientCode,
+    productCode,
+    designation,
+    amount,
+    unitPrice,
+    total,
     date,
   });
 
@@ -58,9 +73,13 @@ router.route('/:id').delete((req, res) => {
 router.route('/:id').put((req, res) => {
   Invoice.findById(req.params.id)
     .then(invoice => {
-      invoice.username = req.body.username;
-      invoice.description = req.body.description;
-      invoice.duration = Number(req.body.duration);
+      invoice.invoiceCode = req.body.invoiceCode;
+      invoice.clientCode = req.body.clientCode;
+      invoice.productCode = req.body.productCode;
+      invoice.designation = req.body.designation;
+      invoice.amount = Number(req.body.amount);
+      invoice.unitPrice = Number(req.body.unitPrice);
+      invoice.total = parseInt(req.body.amount) * parseInt(req.body.unitPrice);
       invoice.date = Date.parse(req.body.date);
       
       invoice.save()

@@ -9,7 +9,7 @@ import { SigninRoutes } from '../components/auth/signin/signin.router';
 import { ClientListingRoutes } from '../components/client-listing/client-listing.router';
 import { InvoiceListingRoutes } from '../components/invoice-listing/invoice-listing.router';
 import { InvoiceFormRoutes } from '../components/invoice-form/invoice-form.router';
-import { CustomerRoutes } from '../components/customer/customer.router';
+import { ProductListingRoutes } from '../components/product-listing/product-listing.router';
 
 
 const routes: Routes = [
@@ -19,7 +19,7 @@ const routes: Routes = [
   ...ClientListingRoutes,
   ...InvoiceListingRoutes,
   ...InvoiceFormRoutes,
-  ...CustomerRoutes,
+  ...ProductListingRoutes,
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];

@@ -15,7 +15,7 @@ const COMPONENTS = [
   Material.MatSnackBarModule,
   Material.MatTableModule,
   Material.MatMenuModule,
-  Material. MatDatepickerModule,
+  Material.MatDatepickerModule,
   Material.MatNativeDateModule,
   Material.MatDialogModule,
   Material.MatGridListModule,

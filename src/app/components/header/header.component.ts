@@ -29,19 +29,19 @@ export class HeaderComponent implements OnInit {
 
   menuAdmin = [
     {
-      class: 'client',
-      url: '/dashboard/client',
-      name: 'client'
+      class: 'customer',
+      url: '/dashboard/customer',
+      name: 'customer'
+    },
+    {
+      class: 'product',
+      url: '/dashboard/product',
+      name: 'product'
     },
     {
       class: 'invoice',
       url: '/dashboard/invoice',
       name: 'invoice'
-    },
-    {
-      class: 'customer',
-      url: '/dashboard/customer',
-      name: 'customer'
     }
   ];
 

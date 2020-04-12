@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 
-import { Client } from '../classes/client.classe';
+import { Client, INPUT_CLIENT } from '../classes/client.classe';
 
 const BASE_URL = 'http://localhost:3000';
 
@@ -13,27 +13,25 @@ const BASE_URL = 'http://localhost:3000';
 export class ClientService {
 
   clientForm: FormGroup;
-  input = [
-    {
-      type: 'text',
-      label: 'name',
-      icon: 'edit',
-      error: 'This field is mandatory.'
-    },
-    {
-      type: 'text',
-      label: 'email',
-      icon: 'email',
-      error: 'Invalid email adress.'
-    },
-  ];
+  input = INPUT_CLIENT;
   option = {
     genderList: ['Male', 'Female', 'Other']
   };
+  array = [];
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    this.getClients().subscribe(
+      (data) => {
+        this.array = data.map(
+          (list) => {
+            return list;
+          }
+        );
+      }
+    );
+  }
 
   private listners = new Subject<any>();
   listen(): Observable<any> {
@@ -43,30 +41,6 @@ export class ClientService {
   filter(filterBy: string) {
     this.listners.next(filterBy);
   }
-
-  // form: FormGroup = new FormGroup({
-  //   $key: new FormControl(null),
-  //   name: new FormControl('', Validators.required),
-  //   email: new FormControl('', Validators.email),
-  //   mobile: new FormControl('', [Validators.required, Validators.pattern(('[5-7]\\d{8}'))]),
-  //   city: new FormControl(0),
-  //   gender: new FormControl('1'),
-  //   hireDate: new FormControl('', Validators.required),
-  //   isPermanent: new FormControl(false),
-  // });
-
-  // initializeFormGroup() {
-  //   this.form.setValue({
-  //     $key: null,
-  //     name: '',
-  //     email: '',
-  //     mobile: '',
-  //     city: 0,
-  //     gender: '1',
-  //     hireDate: '',
-  //     isPermanent: false,
-  //   });
-  // }
 
   getClient(id: string): Observable<Client> {
     return this.http.get<Client>(`${BASE_URL}/clients/${id}`);

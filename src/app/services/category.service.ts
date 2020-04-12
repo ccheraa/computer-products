@@ -3,21 +3,21 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import * as _ from 'lodash';
-import { City } from '../classes/city.classe';
+import { Category } from '../classes/category.classe';
 
 const BASE_URL = 'http://localhost:3000';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CityService {
+export class CategoryService {
 
   array = [];
 
   constructor(
     private http: HttpClient
   ) {
-    this.getCities().subscribe(
+    this.getCategories().subscribe(
       (data) => {
         this.array = data.map(
           (list) => {
@@ -28,7 +28,7 @@ export class CityService {
     );
   }
 
-  getCityName($name) {
+  getCategoryName($name) {
     if ($name == null) {
       return '';
     } else {
@@ -36,8 +36,8 @@ export class CityService {
     }
   }
 
-  getCities(): Observable<City[]> {
-    return this.http.get<City[]>(`${BASE_URL}/cities`);
+  getCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${BASE_URL}/categories`);
   }
 
 }

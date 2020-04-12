@@ -28,14 +28,12 @@ export class ClientFormCreateComponent implements OnInit {
 
   initForm() {
     this.clientCreateForm = new FormGroup({
-      id: new FormControl(''),
+      clientCode: new FormControl('', [Validators.required, Validators.maxLength(4)]),
       name: new FormControl('', Validators.required),
       email: new FormControl('', Validators.email),
       mobile: new FormControl('', [Validators.required, Validators.pattern(('[5-7]\\d{8}'))]),
-      city: new FormControl(0),
-      gender: new FormControl('1'),
-      hireDate: new FormControl('', Validators.required),
-      isPermanent: new FormControl(false),
+      city: new FormControl('', Validators.required),
+      gender: new FormControl('Male'),
     });
   }
 

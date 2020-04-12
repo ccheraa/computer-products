@@ -8,7 +8,7 @@
         (click)="onCreateInvoice()"
         [disabled]=false>
         <mat-icon aria-placeholder="placeholder" aria-label="Add icon" style="margin-right: 2px;">add</mat-icon>
-        <span>Create Invoice</span>
+        <span>Create</span>
       </button>
     </div>
     <mat-form-field class="filter-form-field" floatLabel="never">
@@ -26,24 +26,44 @@
   </mat-toolbar>
   <div class="table-invoice mat-elevation-z8">
     <mat-table #table [dataSource]="dataSource" matSort>
-      <ng-container matColumnDef="username">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Username </mat-header-cell>
-        <mat-cell *matCellDef="let invoice"> {{invoice.username | titlecase}} </mat-cell>
+      <ng-container matColumnDef="invoiceCode">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Code </mat-header-cell>
+        <mat-cell *matCellDef="let invoice"> {{invoice.invoiceCode}} </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="description">
-        <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-        <mat-cell *matCellDef="let invoice"> {{invoice.description}} </mat-cell>
+      <ng-container matColumnDef="clientCode">
+        <mat-header-cell *matHeaderCellDef> Customer code </mat-header-cell>
+        <mat-cell *matCellDef="let invoice"> {{invoice.clientCode | uppercase}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="productCode">
+        <mat-header-cell *matHeaderCellDef> Product code </mat-header-cell>
+        <mat-cell *matCellDef="let invoice"> {{invoice.productCode}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="designation">
+        <mat-header-cell *matHeaderCellDef> Designation </mat-header-cell>
+        <mat-cell *matCellDef="let invoice"> {{invoice.designation}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+        <mat-cell *matCellDef="let invoice"> {{invoice.amount}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="unitPrice">
+        <mat-header-cell *matHeaderCellDef> Unit price </mat-header-cell>
+        <mat-cell *matCellDef="let invoice"> {{invoice.unitPrice}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="total">
+        <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
+        <mat-cell *matCellDef="let invoice"> {{invoice.total}} .00 DA </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="date">
         <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
         <mat-cell *matCellDef="let invoice"> {{invoice.date | date}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="duration">
-        <mat-header-cell *matHeaderCellDef> Duration </mat-header-cell>
-        <mat-cell *matCellDef="let invoice"> {{invoice.duration}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="action">

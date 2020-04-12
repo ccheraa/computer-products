@@ -8,7 +8,7 @@ require('dotenv').config();
 
 const app = express();
 
-// Connect to DB ...
+// Connect to DB...
 const mongoose = require('mongoose');
 const URI =  process.env.ATLAS_URI;
 const connection = mongoose.connection;
@@ -27,20 +27,23 @@ connection.then(
   }
 );
 
-// Add cors ...
+// Add cors...
 const cors = require('cors');
 app.use(cors({
   origin: 'http://localhost:4200'
 }));
 
-// Import Routes ...
+// Import Routes...
 const indexRouter = require('./routes/index.route');
 const usersRouter = require('./routes/users.route');
-const clientsRouter = require('./routes/clients.route');
+const customersRouter = require('./routes/customers.route');
+const productsRouter = require('./routes/products.route');
 const invoicesRouter = require('./routes/invoices.route');
 const citiesRouter = require('./routes/cities.route');
+const categoriesRouter = require('./routes/categories.route');
+// const uploadsRouter = require('./routes/uploads.route');
 
-// View engine setup ...
+// View engine setup...
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -50,30 +53,33 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// ROUTES ...
+// ROUTES...
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/clients', clientsRouter);
+app.use('/clients', customersRouter);
+app.use('/products', productsRouter);
 app.use('/invoices', invoicesRouter);
 app.use('/cities', citiesRouter);
+app.use('/categories', categoriesRouter);
+// app.use('/uploads', uploadsRouter);
 
-// Catch 404 and forward to error handler ...
+// Catch 404 and forward to error handler...
 app.use((req, res, next) => {
   next(createError(404));
 });
 
-// Error handler ...
+// Error handler...
 app.use((err, req, res, next) => {
-  // Set locals, only providing error in devlopement ...
+  // Set locals, only providing error in devlopement...
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'devlopement' ? err : {};
 
-  // Render the error page ...
+  // Render the error page...
   res.status(err.status || 500);
   res.render('error');
 });
 
-// How to we start listening to the app ...
+// How to we start listening to the app...
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);

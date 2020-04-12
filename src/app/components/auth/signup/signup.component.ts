@@ -31,7 +31,8 @@ export class SignupComponent implements OnInit, CanActivate {
     this.signUpForm = new FormGroup({
       email: new FormControl(null, Validators.email),
       username: new FormControl(null, Validators.required),
-      password: new FormControl(null, Validators.required),
+      // password: new FormControl(null, Validators.required),
+      password: new FormControl(null, [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]),
       cnfpassword: new FormControl(null, this.passValidator)
     });
 
@@ -71,7 +72,7 @@ export class SignupComponent implements OnInit, CanActivate {
         (data) => {
           console.log('DATA Sign Up: ', data);
           localStorage.setItem('token', data.toString());
-          this.router.navigate(['/dashboard', 'client']);
+          this.router.navigate(['/dashboard', 'customer']);
           this.notification.success('Registration success...');
         },
         (error) => {
@@ -84,7 +85,7 @@ export class SignupComponent implements OnInit, CanActivate {
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     if (this.auth.loggedIn()) {
-      this.router.navigate(['/dashboard', 'client']);
+      this.router.navigate(['/dashboard', 'customer']);
       return of(false);
     } else {
       return of(true);

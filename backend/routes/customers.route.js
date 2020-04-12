@@ -1,15 +1,23 @@
 var express = require('express');
 var router = express.Router();
 
+const customerController = require('../controllers/customers.controller');
+
+// router.get('/', customerController.getCustomers);
+// router.get('/:id', customerController.getCustomer);
+
 let Client = require('../api/models/client.model');
 
 // GET Client page...
 router.route('/').get(async (req, res) => {
-  const { name, email, mobile } = req.query;
+  const { clientCode, name, email, mobile } = req.query;
   const query = {};
   
   if (mobile) {
     query.mobile = mobile;
+  }
+  if (clientCode) {
+    query.clientCode = RegExp(clientCode, 'i');
   }
   if (name) {
     query.name = RegExp(name, 'i');
@@ -33,22 +41,21 @@ router.route('/:id').get(async (req, res) => {
 // ADD Client...
 router.route('/add').post(async (req, res) => {
   // const { name, email, city, gender, isPermanent } = req.query;
+  // const codeClient = req.body.codeClient;
+  const clientCode = req.body.clientCode;
   const name = req.body.name;
   const email = req.body.email;
   const mobile = Number(req.body.mobile);
   const city = req.body.city.name;
   const gender = req.body.gender;
-  const hireDate = Date.parse(req.body.hireDate);
-  const isPermanent = req.body.isPermanent;
 
   const newClient = new Client({
+    clientCode,
     name,
     email,
     mobile,
     city,
     gender,
-    hireDate,
-    isPermanent,
   });
 
   newClient.save()
@@ -72,8 +79,6 @@ router.route('/:id').put((req, res) => {
       client.mobile = Number(req.body.mobile);
       client.city = req.body.city;
       client.gender = req.body.gender;
-      client.hireDate = Date.parse(req.body.hireDate);
-      client.isPermanent = req.body.isPermanent;
       
       client.save()
         .then(() => res.json('Client Update...'))

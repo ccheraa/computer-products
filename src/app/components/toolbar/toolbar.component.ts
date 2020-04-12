@@ -7,7 +7,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
   @Output() toggleSidenav = new EventEmitter<void>();
-  title = 'Invoices';
+  title = 'Products';
 
   constructor() { }
 

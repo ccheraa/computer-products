@@ -1,38 +1,36 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
-const clientSchema = new Schema(
+const productSchema = new Schema(
   {
-    clientCode: {
-      type: String,
-      required: true,
-      maxlength: 4
-    },
-    name: {
+    productCode: {
       type: String,
       required: true
     },
-    email: {
+    definition: {
       type: String,
-      required: false
+      required: true
     },
-    mobile: {
+    category: {
+      type: String,
+      required: true
+    },
+    quantity: {
       type: Number,
       required: true
     },
-    city: {
-      type: String,
+    price: {
+      type: Number,
       required: true
     },
-    gender: {
+    file: {
       type: String,
-      required: true
     }
   },
   {
     timestamps: true
   }
 );
-const Client = mongoose.model('Client', clientSchema);
+const Product = mongoose.model('Product', productSchema);
 
-module.exports = Client;
+module.exports = Product;

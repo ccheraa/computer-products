@@ -2,8 +2,34 @@
   <mat-card-title>{{title}} Invoice</mat-card-title>
   <mat-card-content>
     <form class="invoice-form" [formGroup]="invoiceForm" novalidate (ngSubmit)="onSaveInvoice()">
-      <mat-form-field class="full-width" *ngFor="let item of input">
-        <input matInput [type]="item.type" [placeholder]="'Enter your ' + item.label" formControlName="{{item.label}}">
+      <mat-form-field class="full-width">
+        <input matInput type="text" placeholder="Code invoice" formControlName="invoiceCode">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-select placeholder="Code client" formControlName="clientCode">
+          <mat-option *ngFor="let customer of customerList" [value]="customer.clientCode">
+            {{customer.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-select placeholder="Code product" formControlName="productCode">
+          <mat-option *ngFor="let product of productList" [value]="product.productCode">
+            {{product.category}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" *ngFor="let item of inputTop">
+        <input matInput [type]="item.type" [placeholder]="'Enter your ' + item.placeholder" formControlName="{{item.control}}">
+        <mat-icon matSuffix [attr.aria-label]="item.icon + ' icon'">{{item.icon}}</mat-icon>
+        <mat-error>{{item.error}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" *ngFor="let item of inputBottom">
+        <input matInput [type]="item.type" [placeholder]="'Enter your ' + item.placeholder" formControlName="{{item.control}}">
         <mat-icon matSuffix [attr.aria-label]="item.icon + ' icon'">{{item.icon}}</mat-icon>
         <mat-error>{{item.error}}</mat-error>
       </mat-form-field>
@@ -16,7 +42,7 @@
       </mat-form-field>
 
       <div class="btn-row">
-        <button type="submit" mat-raised-button color="warn" [disabled]=invoiceForm.invalid>
+        <button type="submit" mat-raised-button color="warn" [disabled]="invoiceForm.invalid">
           <mat-icon aria-label="Account icon">account_circle</mat-icon>
           <span>{{title}}</span>
         </button>

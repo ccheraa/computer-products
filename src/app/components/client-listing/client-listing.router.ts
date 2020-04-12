@@ -4,7 +4,7 @@ import { ClientListingComponent } from './client-listing.component';
 
 export const ClientListingRoutes: Routes = [
   {
-    path: 'dashboard/client',
+    path: 'dashboard/customer',
     component: ClientListingComponent,
     canActivate: [AuthGuard],
   },

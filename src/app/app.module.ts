@@ -20,11 +20,13 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { SigninComponent } from './components/auth/signin/signin.component';
 import { ClientListingComponent } from './components/client-listing/client-listing.component';
-import { ClientFormComponent } from './components/client-form/client-form.component';
-import { ClientFormCreateComponent } from './components/client-form/client-form-create/client-form-create.component';
+import { ClientFormCreateComponent } from './components/client-form-create/client-form-create.component';
+import { ClientFormUpdateComponent } from './components/client-form-update/client-form-update.component';
 import { InvoiceListingComponent } from './components/invoice-listing/invoice-listing.component';
 import { InvoiceFormComponent } from './components/invoice-form/invoice-form.component';
-import { CustomerComponent } from './components/customer/customer.component';
+import { ProductListingComponent } from './components/product-listing/product-listing.component';
+import { ProductFormCreateComponent } from './components/product-form-create/product-form-create.component';
+import { ProductFormUpdateComponent } from './components/product-form-update/product-form-update.component';
 
 @NgModule({
   declarations: [
@@ -41,14 +43,17 @@ import { CustomerComponent } from './components/customer/customer.component';
     ClientListingComponent,
     InvoiceListingComponent,
     InvoiceFormComponent,
-    CustomerComponent,
+    ProductListingComponent,
     // dialog
-    ClientFormComponent,
     ClientFormCreateComponent,
+    ClientFormUpdateComponent,
+    ProductFormCreateComponent,
+    ProductFormUpdateComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    // Material modules
     AppMaterialModule,
     FormsModule,
     ReactiveFormsModule,
@@ -69,8 +74,10 @@ import { CustomerComponent } from './components/customer/customer.component';
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    ClientFormComponent,
-    ClientFormCreateComponent
+    ClientFormCreateComponent,
+    ClientFormUpdateComponent,
+    ProductFormCreateComponent,
+    ProductFormUpdateComponent,
   ]
 })
 export class AppModule { }

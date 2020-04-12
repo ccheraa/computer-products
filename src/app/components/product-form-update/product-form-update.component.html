@@ -1,0 +1,51 @@
+<mat-toolbar class="product-update-toolbar">
+  <span class="title-dialog">Update product</span>
+  <span class="fill-remaining-space"></span>
+  <button mat-stroked-button class="btn-dialog-close" (click)="onClose()" tabindex="-1">
+    <mat-icon aria-label="Clear icon">clear</mat-icon>
+  </button>
+</mat-toolbar>
+
+<form class="product-form-update" [formGroup]="productUpdateForm" (ngSubmit)="onUpdateProduct()">
+  <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field class="full-width" *ngFor="let item of inputRowTop">
+          <input matInput [type]="item.type" [placeholder]="'Enter your ' + item.placeholder" formControlName="{{item.control}}">
+          <mat-icon matSuffix [attr.aria-label]="item.icon + ' icon'">{{item.icon}}</mat-icon>
+          <mat-error>{{item.error}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Category</mat-label>
+          <mat-select placeholder="Enter your category" formControlName="category">
+            <mat-option *ngFor="let categoryList of category.array" [value]="categoryList.name">
+              {{categoryList.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Definition</mat-label>
+          <textarea matInput placeholder="Ex. 100 Main St" formControlName="definition">1600 Amphitheatre Pkwy</textarea>
+          <mat-icon matSuffix aria-label="edit icon">edit</mat-icon>
+          <mat-error>Definition is required</mat-error>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field class="full-width" *ngFor="let item of inputRowBottom">
+          <input matInput [type]="item.type" [placeholder]="'Enter your ' + item.placeholder" formControlName="{{item.control}}" min="0">
+          <mat-icon matSuffix [attr.aria-label]="item.icon + ' icon'">{{item.icon}}</mat-icon>
+          <mat-error>{{item.error}}</mat-error>
+        </mat-form-field>
+
+        <div class="button-row">
+          <button mat-raised-button color="accent" type="submit" [disabled]="productUpdateForm.invalid">Update</button>
+        </div>
+      </div>
+    </mat-grid-tile>    
+  </mat-grid-list>
+</form>

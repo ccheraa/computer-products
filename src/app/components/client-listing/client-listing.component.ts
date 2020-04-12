@@ -5,11 +5,11 @@ import { FormGroup } from '@angular/forms';
 import { Client } from 'src/app/classes/client.classe';
 
 import { ClientService } from 'src/app/services/client.service';
+import { CityService } from 'src/app/services/city.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
-import { ClientFormComponent } from '../client-form/client-form.component';
-import { ClientFormCreateComponent } from '../client-form/client-form-create/client-form-create.component';
-import { CityService } from 'src/app/services/city.service';
+import { ClientFormCreateComponent } from '../client-form-create/client-form-create.component';
+import { ClientFormUpdateComponent } from '../client-form-update/client-form-update.component';
 
 const ELEMENT_DATA: Client[] = [];
 
@@ -24,19 +24,18 @@ export class ClientListingComponent implements OnInit {
   @ViewChild(MatPaginator, null) paginator: MatPaginator;
 
   displayedColumns: string[] = [
+    'clientCode',
     'name',
     'email',
     'mobile',
     'gender',
     'city',
-    'creation',
     'action'
   ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   filterKey: string;
   loadingData = true;
   noData = false;
-  reactiveForm: FormGroup;
 
   constructor(
     private dialog: MatDialog,
@@ -68,12 +67,14 @@ export class ClientListingComponent implements OnInit {
             this.noData = false;
           }, 1500);
         } else {
-          this.loadingData = false;
-          this.noData = true;
+          setTimeout(() => {
+            this.loadingData = false;
+            this.noData = true;
+          }, 1500);
         }
       },
       (err) => {
-        console.error('Failed to fetch Client: ', err);
+        console.error('Failed to fetch Customer: ', err);
         this.loadingData = false;
         this.noData = true;
       }
@@ -85,10 +86,10 @@ export class ClientListingComponent implements OnInit {
     this.applyFilter(null);
   }
 
-  applyFilter(name) {
-    this.client.searchClients({name}).subscribe(
+  applyFilter(clientCode) {
+    this.client.searchClients({clientCode}).subscribe(
       (data) => {
-        if (name) {
+        if (clientCode) {
           this.dataSource.data = data;
         } else {
           this.initForm();
@@ -106,7 +107,6 @@ export class ClientListingComponent implements OnInit {
   }
 
   onEdit(row) {
-    console.log('Row Client: ', row.city);
     // this.client.clientForm = row;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -114,16 +114,16 @@ export class ClientListingComponent implements OnInit {
     dialogConfig.width = '80%';
     dialogConfig.panelClass = 'panelClass';
     dialogConfig.data = this.client.clientForm = row;
-    this.dialog.open(ClientFormComponent, dialogConfig);
+    this.dialog.open(ClientFormUpdateComponent, dialogConfig);
   }
 
-  onDelete(_ID) {
+  onDelete(_ID: string) {
     this.client.deleteClient(_ID).subscribe(
       (data) => {
         this.dataSource.data = this.dataSource.data.filter(client => client._id !== _ID);
-        this.notification.success('Client delete...');
+        this.notification.success('Customer delete...');
       },
-      () => this.notification.warn('Failed to delete Client...')
+      () => this.notification.warn('Failed to delete Customer...')
     );
   }
 

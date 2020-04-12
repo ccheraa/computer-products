@@ -1,28 +1,44 @@
 export interface Invoice {
   _id: string;
-  username: string;
-  description: string;
+  invoiceCode: string;
+  clientCode: string;
+  productCode: string;
+  designation: string;
+  amount: number;
+  unitPrice: number;
   date: Date;
-  duration: number;
 }
 
-export const INPUT_INVOICE = [
+export const INPUT_INVOICE_TOP = [
+  // {
+  //   type: 'text',
+  //   placeholder: 'product code',
+  //   control: 'productCode',
+  //   icon: 'perm_identity',
+  //   error: 'Product is required'
+  // },
   {
     type: 'text',
-    label: 'username',
-    icon: 'perm_identity',
-    error: 'Username is required'
-  },
-  {
-    type: 'text',
-    label: 'description',
+    placeholder: 'designation',
+    control: 'designation',
     icon: 'edit',
-    error: 'Description is required'
+    error: 'Designation is required'
+  }
+];
+
+export const INPUT_INVOICE_BOTTOM = [
+  {
+    type: 'number',
+    placeholder: 'amount',
+    control: 'amount',
+    icon: 'edit',
+    error: 'Amount is required'
   },
   {
     type: 'number',
-    label: 'duration',
+    placeholder: 'unit price',
+    control: 'unitPrice',
     icon: 'edit',
-    error: 'Duration is required'
+    error: 'Unit price is required'
   }
 ];

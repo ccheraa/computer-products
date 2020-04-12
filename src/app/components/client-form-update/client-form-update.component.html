@@ -1,5 +1,5 @@
 <mat-toolbar class="client-toolbar">
-  <span class="title-dialog">Update Client</span>
+  <span class="title-dialog">Update Customer</span>
   <span class="fill-remaining-space"></span>
   <button mat-stroked-button class="btn-dialog-close" (click)="onClose()" tabindex="-1">
     <mat-icon aria-label="Clear icon">clear</mat-icon>
@@ -10,14 +10,17 @@
   <mat-grid-list cols="2" rowHeight="2:1">
     <mat-grid-tile>
       <div class="controles-container">
-        <!-- <input type="hidden" formControlName="$key"> -->
+        <mat-form-field class="full-width">
+          <input matInput type="text" readonly="readonly" formControlName="clientCode">
+        </mat-form-field>
+
         <mat-form-field class="full-width" *ngFor="let item of client.input">
-          <input matInput [type]="item.type" [placeholder]="'Enter your ' + item.label" formControlName="{{item.label}}">
+          <input matInput [type]="item.type" [placeholder]="'Enter your ' + item.placeholder" formControlName="{{item.control}}">
           <mat-icon matSuffix [attr.aria-label]="item.icon + ' icon'">{{item.icon}}</mat-icon>
           <mat-error>{{item.error}}</mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <!-- <mat-form-field>
           <span matPrefix>+213 &nbsp;</span>
           <input type="tel" matInput placeholder="Mobile*" formControlName="mobile">
           <mat-icon matSuffix aria-label="phone icon">phone</mat-icon>
@@ -27,7 +30,7 @@
           <mat-error *ngIf="clientForm.controls['mobile'].errors?.pattern">
             Minimum 9 charactors needed, and the first digit must be either 5 or 6 or 7.
           </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
       </div>
     </mat-grid-tile>
 
@@ -42,6 +45,18 @@
         </div>
 
         <mat-form-field>
+          <span matPrefix>+213 &nbsp;</span>
+          <input type="tel" matInput placeholder="Mobile*" formControlName="mobile">
+          <mat-icon matSuffix aria-label="phone icon">phone</mat-icon>
+          <mat-error *ngIf="clientForm.controls['mobile'].errors?.required">
+            This field is mandatory.
+          </mat-error>
+          <mat-error *ngIf="clientForm.controls['mobile'].errors?.pattern">
+            Minimum 9 charactors needed, and the first digit must be either 5 or 6 or 7.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
           <mat-label>City</mat-label>
           <mat-select placeholder="City" formControlName="city">
             <mat-option *ngFor="let cityList of city.array" [value]="cityList.name">
@@ -50,16 +65,16 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="full-width">
+        <!-- <mat-form-field class="full-width">
           <input matInput [matDatepicker]="date" placeholder="Choose a date" formControlName="hireDate">
           <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
           <mat-datepicker #date></mat-datepicker>
           <mat-error>Date is required</mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <div class="add-bottom-padding">
+        <!-- <div class="add-bottom-padding">
           <mat-checkbox formControlName="isPermanent">Permanent Client</mat-checkbox>
-        </div>
+        </div> -->
 
         <div class="button-row">
           <button mat-raised-button color="accent" type="submit" [disabled]="clientForm.invalid">Save</button>

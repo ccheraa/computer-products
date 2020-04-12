@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
-const clientSchema = new Schema(
+const customerSchema = new Schema(
   {
     clientCode: {
       type: String,
@@ -33,6 +33,6 @@ const clientSchema = new Schema(
     timestamps: true
   }
 );
-const Client = mongoose.model('Client', clientSchema);
+const Customer = mongoose.model('Customer', customerSchema);
 
-module.exports = Client;
+module.exports = Customer;

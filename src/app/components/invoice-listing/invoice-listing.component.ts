@@ -21,10 +21,14 @@ export class InvoiceListingComponent implements OnInit, CanActivate {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   displayedColumns: string[] = [
-    'username',
-    'description',
+    'invoiceCode',
+    'clientCode',
+    'productCode',
+    'designation',
+    'amount',
+    'unitPrice',
+    'total',
     'date',
-    'duration',
     'action'
   ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
@@ -54,8 +58,10 @@ export class InvoiceListingComponent implements OnInit, CanActivate {
             this.loadingData = false;
           }, 1500);
         } else {
-          this.loadingData = false;
-          this.noData = true;
+          setTimeout(() => {
+            this.loadingData = false;
+            this.noData = true;
+          }, 1500);
         }
       },
       (err) => {
@@ -66,10 +72,10 @@ export class InvoiceListingComponent implements OnInit, CanActivate {
     );
   }
 
-  applyFilter(username) {
-    this.invoice.searchInvoices({username}).subscribe(
+  applyFilter(invoiceCode) {
+    this.invoice.searchInvoices({invoiceCode}).subscribe(
       data => {
-        if (username) {
+        if (invoiceCode) {
           this.dataSource.data = data;
         } else {
           this.initForm();

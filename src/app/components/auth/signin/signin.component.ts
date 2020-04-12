@@ -47,7 +47,7 @@ export class SigninComponent implements OnInit, CanActivate {
         (data) => {
           console.log('DATA Sign In: ', data);
           localStorage.setItem('token', data.toString());
-          this.router.navigate(['/dashboard', 'client']);
+          this.router.navigate(['/dashboard', 'customer']);
           this.notification.success('Username success...');
         },
         () => {
@@ -59,7 +59,7 @@ export class SigninComponent implements OnInit, CanActivate {
 
   canActivate(): Observable<boolean> {
     if (this.auth.loggedIn()) {
-      this.router.navigate(['/dashboard', 'client']);
+      this.router.navigate(['/dashboard', 'customer']);
       return of(false);
     } else {
       return of(true);

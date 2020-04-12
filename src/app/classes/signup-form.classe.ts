@@ -15,7 +15,7 @@ export const FORM = [
     type: 'password',
     label: 'password',
     icon: 'visibility_off',
-    error: 'Password is a mandatory field'
+    error: 'Password must be at least 6 characters long'
   },
   {
     type: 'password',
