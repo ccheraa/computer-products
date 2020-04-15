@@ -52,11 +52,11 @@ export class ProductFormUpdateComponent implements OnInit {
     if (this.productUpdateForm.valid) {
       this.product.updateProduct(this.productUpdateForm.value.id, this.productUpdateForm.value).subscribe(
         (data) => {
-          this.notification.success('Product update');
+          this.notification.success('Product update.');
           this.onClose();
         },
         () => {
-          this.notification.warn('Failed to update Product...');
+          this.notification.warn('Failed to update Product !');
         }
       );
     }

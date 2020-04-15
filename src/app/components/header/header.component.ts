@@ -42,6 +42,11 @@ export class HeaderComponent implements OnInit {
       class: 'invoice',
       url: '/dashboard/invoice',
       name: 'invoice'
+    },
+    {
+      class: 'admin',
+      url: '/dashboard/admin',
+      name: 'user'
     }
   ];
 

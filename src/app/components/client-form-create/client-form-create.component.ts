@@ -51,11 +51,11 @@ export class ClientFormCreateComponent implements OnInit {
       this.client.createClient(this.clientCreateForm.value).subscribe(
         (data) => {
           this.clientCreateForm.reset();
-          this.notification.success('Client created...');
+          this.notification.success('Customer created.');
           this.onClose();
         },
         () => {
-          this.notification.warn('Failed to create Client !');
+          this.notification.warn('Failed to create Customer !');
         }
       );
     }

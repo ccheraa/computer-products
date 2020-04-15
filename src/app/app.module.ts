@@ -27,6 +27,7 @@ import { InvoiceFormComponent } from './components/invoice-form/invoice-form.com
 import { ProductListingComponent } from './components/product-listing/product-listing.component';
 import { ProductFormCreateComponent } from './components/product-form-create/product-form-create.component';
 import { ProductFormUpdateComponent } from './components/product-form-update/product-form-update.component';
+import { AdminUserComponent } from './components/admin-user/admin-user.component';
 
 @NgModule({
   declarations: [
@@ -44,16 +45,16 @@ import { ProductFormUpdateComponent } from './components/product-form-update/pro
     InvoiceListingComponent,
     InvoiceFormComponent,
     ProductListingComponent,
+    AdminUserComponent,
     // dialog
     ClientFormCreateComponent,
     ClientFormUpdateComponent,
     ProductFormCreateComponent,
-    ProductFormUpdateComponent
+    ProductFormUpdateComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    // Material modules
     AppMaterialModule,
     FormsModule,
     ReactiveFormsModule,

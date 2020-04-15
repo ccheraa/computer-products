@@ -48,10 +48,10 @@ export class SigninComponent implements OnInit, CanActivate {
           console.log('DATA Sign In: ', data);
           localStorage.setItem('token', data.toString());
           this.router.navigate(['/dashboard', 'customer']);
-          this.notification.success('Username success...');
+          this.notification.success('Username success.');
         },
         () => {
-          this.notification.warn('User email is not registered...');
+          this.notification.warn('User email is not registered !');
         }
       );
     }

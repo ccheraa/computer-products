@@ -81,7 +81,7 @@ export class InvoiceFormComponent implements OnInit {
             this.invoiceForm.patchValue(this._INVOICE);
           },
           () => {
-            this.notification.warn('Failed to get Invoice...');
+            this.notification.warn('Failed to get Invoice !');
             this.router.navigateByUrl('/dashboard/invoice');
           }
         );
@@ -110,18 +110,18 @@ export class InvoiceFormComponent implements OnInit {
       if (this._INVOICE) {
         this.invoice.updateInvoice(this._INVOICE._id, this.invoiceForm.value).subscribe(
           (data) => {
-            this.notification.success('Invoice update');
+            this.notification.success('Invoice update.');
             this.router.navigate(['/dashboard', 'invoice']);
           },
           () => {
-            this.notification.warn('Failed to update Invoice...');
+            this.notification.warn('Failed to update Invoice !');
           }
         );
       } else {
         this.invoice.createInvoice(this.invoiceForm.value).subscribe(
           (data) => {
             this.invoiceForm.reset();
-            this.notification.success('Invoice created...');
+            this.notification.success('Invoice created.');
             this.router.navigate(['/dashboard', 'invoice']);
           },
           () => {

@@ -56,11 +56,11 @@ export class ProductFormCreateComponent implements OnInit {
       this.product.createProduct(this.productCreateForm.value).subscribe(
         (data) => {
           this.productCreateForm.reset();
-          this.notification.success('Product add ...');
+          this.notification.success('Product add.');
           this.onClose();
         },
         () => {
-          this.notification.warn('Failed to add product!');
+          this.notification.warn('Failed to add Product !');
         }
       );
     }
@@ -70,18 +70,18 @@ export class ProductFormCreateComponent implements OnInit {
     // this.product.uploadImage(event.target.files[0]).subscribe(
     //   (data: any) => {
     //     this.imageUrl = data.imageUrl;
-    //     this.notification.success('File uploaded');
+    //     this.notification.success('File uploaded.');
     //   },
     //   () => {
-    //     this.notification.warn('Please upload valid file!');
+    //     this.notification.warn('Please upload valid file !');
     //   }
     // );
     this.product.uploadPhoto(event.target.files[0]).subscribe(
       (data: any) => {
-        this.notification.success('File uploaded');
+        this.notification.success('File uploaded.');
       },
       () => {
-        this.notification.warn('Please upload valid file!');
+        this.notification.warn('Please upload valid file !');
       }
     );
   }

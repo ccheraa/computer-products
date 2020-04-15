@@ -101,9 +101,9 @@ export class InvoiceListingComponent implements OnInit, CanActivate {
     this.invoice.deleteInvoice(id).subscribe(
       data => {
         this.dataSource.data = this.dataSource.data.filter(invoice => invoice._id !== id);
-        this.notification.success('Invoice delete...');
+        this.notification.success('Invoice delete.');
       },
-      err => this.notification.warn('Failed to delete Invoice...')
+      err => this.notification.warn('Failed to delete Invoice !')
     );
   }
 
@@ -115,5 +115,4 @@ export class InvoiceListingComponent implements OnInit, CanActivate {
       return false;
     }
   }
-
 }

@@ -86,10 +86,10 @@ export class ClientListingComponent implements OnInit {
     this.applyFilter(null);
   }
 
-  applyFilter(clientCode) {
-    this.client.searchClients({clientCode}).subscribe(
+  applyFilter(name) {
+    this.client.searchClients({name}).subscribe(
       (data) => {
-        if (clientCode) {
+        if (name) {
           this.dataSource.data = data;
         } else {
           this.initForm();
@@ -121,9 +121,9 @@ export class ClientListingComponent implements OnInit {
     this.client.deleteClient(_ID).subscribe(
       (data) => {
         this.dataSource.data = this.dataSource.data.filter(client => client._id !== _ID);
-        this.notification.success('Customer delete...');
+        this.notification.success('Customer delete.');
       },
-      () => this.notification.warn('Failed to delete Customer...')
+      () => this.notification.warn('Failed to delete Customer !')
     );
   }
 

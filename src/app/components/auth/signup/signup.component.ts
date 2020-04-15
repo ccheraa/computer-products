@@ -73,7 +73,7 @@ export class SignupComponent implements OnInit, CanActivate {
           console.log('DATA Sign Up: ', data);
           localStorage.setItem('token', data.toString());
           this.router.navigate(['/dashboard', 'customer']);
-          this.notification.success('Registration success...');
+          this.notification.success('Registration success.');
         },
         (error) => {
           this.signUpForm.reset();

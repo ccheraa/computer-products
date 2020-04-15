@@ -48,11 +48,11 @@ export class ClientFormUpdateComponent implements OnInit {
     if (this.clientForm.valid) {
       this.client.updateClient(this.clientForm.value.id, this.clientForm.value).subscribe(
         (data) => {
-          this.notification.success('Client update');
+          this.notification.success('Customer update.');
           this.onClose();
         },
         () => {
-          this.notification.warn('Failed to update Client...');
+          this.notification.warn('Failed to update Customer !');
         }
       );
     }

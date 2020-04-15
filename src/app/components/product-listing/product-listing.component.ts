@@ -121,9 +121,9 @@ export class ProductListingComponent implements OnInit {
     this.product.deleteProduct(_ID).subscribe(
       (data) => {
         this.dataSource.data = this.dataSource.data.filter(product => product._id !== _ID);
-        this.notification.success('Product delete...');
+        this.notification.success('Product delete.');
       },
-      () => this.notification.warn('Failed to delete Product...')
+      () => this.notification.warn('Failed to delete Product !')
     );
   }
 

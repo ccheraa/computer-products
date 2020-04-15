@@ -10,6 +10,7 @@ import { ClientListingRoutes } from '../components/client-listing/client-listing
 import { InvoiceListingRoutes } from '../components/invoice-listing/invoice-listing.router';
 import { InvoiceFormRoutes } from '../components/invoice-form/invoice-form.router';
 import { ProductListingRoutes } from '../components/product-listing/product-listing.router';
+import { AdminUserRoutes } from '../components/admin-user/admin-user.router';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   ...InvoiceListingRoutes,
   ...InvoiceFormRoutes,
   ...ProductListingRoutes,
+  ...AdminUserRoutes,
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
