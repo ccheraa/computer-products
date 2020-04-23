@@ -1,0 +1,73 @@
+<mat-toolbar class="user-create-toolbar">
+  <span class="title-dialog">{{ title }}</span>
+  <span class="fill-remaining-space"></span>
+  <button mat-stroked-button class="btn-dialog-close" (click)="onClose()" tabindex="-1">
+    <mat-icon aria-label="Clear icon">clear</mat-icon>
+  </button>
+</mat-toolbar>
+
+<form class="user-form-authorized" [formGroup]="userAuthorizedForm" [ngStyle]="{display: user.statusOn}">
+  <mat-grid-list cols="4" rowHeight="100px">
+    <mat-grid-tile
+      *ngFor="let tile of tiles"
+      [colspan]="tile.cols"
+      [rowspan]="tile.rows"
+      [style.background]="tile.color">
+      <div class="controles-container">
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input matInput type="text" formControlName="user_authorized">
+          <mat-icon matSuffix aria-label="username icon">perm_identity</mat-icon>
+          <mat-error>error</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password">
+          <mat-icon matSuffix aria-label="off icon">visibility_off</mat-icon>
+          <mat-error>error</mat-error>
+        </mat-form-field>
+
+        <div class="btn-row">
+          <button type="submit" mat-raised-button color="warn" [disabled]=userAuthorizedForm.invalid (click)="onAuthorizedUser()">
+            <mat-icon aria-label="Account icon" style="margin-right: 2px;">account_circle</mat-icon>
+            <span>Save</span>
+          </button>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>
+
+<form class="user-form-create" [formGroup]="userCreateForm" [ngStyle]="{display: user.statusOff}">
+  <mat-grid-list cols="4" rowHeight="100px">
+    <mat-grid-tile
+      *ngFor="let tile of tiles"
+      [colspan]="tile.cols"
+      [rowspan]="tile.rows"
+      [style.background]="tile.color">
+      <div class="controles-container">
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input matInput type="text" formControlName="user_create">
+          <mat-icon matSuffix aria-label="username icon">perm_identity</mat-icon>
+          <mat-error>error</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password">
+          <mat-icon matSuffix aria-label="off icon">visibility_off</mat-icon>
+          <mat-error>error</mat-error>
+        </mat-form-field>
+
+        <div class="btn-row">
+          <button type="submit" mat-raised-button color="warn" [disabled]=userCreateForm.invalid (click)="onCreateUser()">
+            <mat-icon aria-label="Account icon" style="margin-right: 2px;">account_circle</mat-icon>
+            <span>Save</span>
+          </button>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>

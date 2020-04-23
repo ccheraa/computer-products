@@ -61,5 +61,4 @@ export class ProductFormUpdateComponent implements OnInit {
       );
     }
   }
-
 }

@@ -28,6 +28,8 @@ import { ProductListingComponent } from './components/product-listing/product-li
 import { ProductFormCreateComponent } from './components/product-form-create/product-form-create.component';
 import { ProductFormUpdateComponent } from './components/product-form-update/product-form-update.component';
 import { AdminUserComponent } from './components/admin-user/admin-user.component';
+import { AdminUserCreateComponent } from './components/admin-user-create/admin-user-create.component';
+import { AdminUserUpdateComponent } from './components/admin-user-update/admin-user-update.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { AdminUserComponent } from './components/admin-user/admin-user.component
     ClientFormUpdateComponent,
     ProductFormCreateComponent,
     ProductFormUpdateComponent,
+    AdminUserCreateComponent,
+    AdminUserUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -79,6 +83,8 @@ import { AdminUserComponent } from './components/admin-user/admin-user.component
     ClientFormUpdateComponent,
     ProductFormCreateComponent,
     ProductFormUpdateComponent,
+    AdminUserCreateComponent,
+    AdminUserUpdateComponent,
   ]
 })
 export class AppModule { }

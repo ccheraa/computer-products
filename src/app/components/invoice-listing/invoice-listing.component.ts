@@ -65,7 +65,6 @@ export class InvoiceListingComponent implements OnInit, CanActivate {
         }
       },
       (err) => {
-        console.error('Failed to fetch Invoice: ', err);
         this.loadingData = false;
         this.noData = true;
       }

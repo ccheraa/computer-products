@@ -31,9 +31,9 @@ export class SignupComponent implements OnInit, CanActivate {
     this.signUpForm = new FormGroup({
       email: new FormControl(null, Validators.email),
       username: new FormControl(null, Validators.required),
-      // password: new FormControl(null, Validators.required),
       password: new FormControl(null, [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]),
-      cnfpassword: new FormControl(null, this.passValidator)
+      cnfpassword: new FormControl(null, this.passValidator),
+      permission: new FormControl('unauthorized'),
     });
 
     this.signUpForm.controls.password.valueChanges.subscribe(
@@ -70,12 +70,10 @@ export class SignupComponent implements OnInit, CanActivate {
     if (this.signUpForm.valid) {
       this.auth.submitSignUp(this.signUpForm.value).subscribe(
         (data) => {
-          console.log('DATA Sign Up: ', data);
-          localStorage.setItem('token', data.toString());
-          this.router.navigate(['/dashboard', 'customer']);
-          this.notification.success('Registration success.');
+          this.router.navigate(['/home']);
+          this.notification.success('Registration success');
         },
-        (error) => {
+        () => {
           this.signUpForm.reset();
           this.notification.warn('User already exists !');
         }
@@ -85,7 +83,7 @@ export class SignupComponent implements OnInit, CanActivate {
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     if (this.auth.loggedIn()) {
-      this.router.navigate(['/dashboard', 'customer']);
+      this.router.navigate(['/home']);
       return of(false);
     } else {
       return of(true);

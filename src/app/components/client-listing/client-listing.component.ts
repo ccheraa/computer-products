@@ -6,6 +6,7 @@ import { Client } from 'src/app/classes/client.classe';
 
 import { ClientService } from 'src/app/services/client.service';
 import { CityService } from 'src/app/services/city.service';
+import { ProductService } from 'src/app/services/product.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
 import { ClientFormCreateComponent } from '../client-form-create/client-form-create.component';
@@ -41,6 +42,7 @@ export class ClientListingComponent implements OnInit {
     private dialog: MatDialog,
     private client: ClientService,
     private city: CityService,
+    private product: ProductService,
     private notification: NotificationService
   ) {
     this.client.listen().subscribe(
@@ -126,5 +128,4 @@ export class ClientListingComponent implements OnInit {
       () => this.notification.warn('Failed to delete Customer !')
     );
   }
-
 }

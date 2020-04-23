@@ -74,4 +74,5 @@ export class ClientService {
 
     return this.http.get<Client[]>(`${BASE_URL}/clients` + query);
   }
+
 }

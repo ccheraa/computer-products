@@ -7,6 +7,7 @@ import { FORM } from 'src/app/classes/signin-form.classe';
 
 import { AuthService } from 'src/app/services/core/auth.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-signin',
@@ -20,7 +21,8 @@ export class SigninComponent implements OnInit, CanActivate {
   constructor(
     private router: Router,
     private auth: AuthService,
-    private notification: NotificationService
+    private notification: NotificationService,
+    private user: UserService
   ) { }
 
   ngOnInit() {
@@ -45,13 +47,13 @@ export class SigninComponent implements OnInit, CanActivate {
     if (this.signInForm.valid) {
       this.auth.submitSignIn(this.signInForm.value).subscribe(
         (data) => {
-          console.log('DATA Sign In: ', data);
           localStorage.setItem('token', data.toString());
           this.router.navigate(['/dashboard', 'customer']);
-          this.notification.success('Username success.');
+          this.notification.success('Username success');
         },
         () => {
-          this.notification.warn('User email is not registered !');
+          // this.notification.warn('User email is not registered !');
+          this.notification.warn('User is not authorized !');
         }
       );
     }

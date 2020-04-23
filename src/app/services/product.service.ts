@@ -84,10 +84,10 @@ export class ProductService {
     return this.http.post(`${BASE_URL}/uploads`, data);
   }
 
-    // Méthode Télécharger un fichier
-    uploadPhoto(image) {
-      const data = new FormData();
-      data.append('file', image);
-      return this.http.post(`${BASE_URL}/products/upload`, data);
-    }
+  // Méthode Télécharger un fichier
+  uploadPhoto(image) {
+    const data = new FormData();
+    data.append('file', image);
+    return this.http.post(`${BASE_URL}/products/upload`, data);
+  }
 }

@@ -2,8 +2,27 @@ const jwt = require('jsonwebtoken');
 
 let User = require('../api/models/user.model');
 
-// Get user
-exports.getUser = (req, res) => {
+// GET user list page
+exports.getUsers = async (req, res) => {
+  const { username, email, permission } = req.query;
+  const query = {};
+
+  if (username) {
+    query.username = RegExp(username, 'i');
+  }
+  if (permission) {
+    query.permission = RegExp(permission, 'i');
+  }
+
+  User.find(query)
+    .then((user) => res.json(user))
+    .catch(() => res.status(501).json({
+      message: 'Users not found.'
+    }));
+};
+
+// GET user token
+exports.getUserToken = (req, res) => {
   return res.status(200).json(decodedToken.username);
 }
 
@@ -15,7 +34,8 @@ exports.signup = async (req, res) => {
       const newUser = new User({
         email: req.body.email,
         username: req.body.username,
-        password: hash
+        password: hash,
+        permission: req.body.permission
       });
 
       let promise = newUser.save();
@@ -34,13 +54,40 @@ exports.signup = async (req, res) => {
 
       promise.catch((error) => {
         return res.status(501).json({
-          message: 'Error registering user ...',
+          message: 'Error registering user',
           error: error
         });
       });
     }
   );
 }
+
+// UPDATE user
+exports.updateUser = (req, res) => {
+  User.findById(req.params.id).then(
+    (user) => {
+      user.permission = req.body.permission;
+
+      let promise = user.save();
+      promise.then(
+        () => {
+          return res.status(200).json({
+            message: 'User authorized',
+          })
+        }
+      );
+
+      promise.catch(
+        (error) => {
+          return res.status(501).json({
+            message: 'Error failed user',
+            error: error
+          });
+        }
+      );
+    }
+  ).catch(err => res.status(400).json('Error: ' + err));
+};
 
 // Connected users
 exports.signin = async (req, res) => {
@@ -50,20 +97,27 @@ exports.signin = async (req, res) => {
 
   promise.then((user) => {
     if (user) {
-      if (user.isValid(req.body.password)) {
-        // Generate token ...
-        let token = jwt.sign({username: user.username}, 'secret', {expiresIn: '2h'});
-        return res.status(200).json(token);
+      if (user.permission === 'authorized') {
+        if (user.isValid(req.body.password)) {
+          // Generate token ...
+          let token = jwt.sign({username: user.username}, 'secret', {expiresIn: '2h'});
+          return res.status(200).json(token);
+        }
+        else {
+          return res.status(501).json({
+            message: 'Invalid credentials'
+          });
+        }
       }
       else {
         return res.status(501).json({
-          message: 'Invalid credentials'
+          message: 'User is not authorized'
         });
       }
     }
     else {
       return res.status(501).json({
-        message: 'User email is not registered...'
+        message: 'User email is not registered'
       });
     }
   });
@@ -75,4 +129,13 @@ exports.signin = async (req, res) => {
       });
     }
   );
+}
+
+// DELETE user
+exports.deleteUser = (req, res) => {
+  User.findByIdAndDelete(req.params.id)
+    .then(() => res.json('User delete.'))
+    .catch(() => res.status(501).json({
+      message: 'User not found !'
+    }));
 }

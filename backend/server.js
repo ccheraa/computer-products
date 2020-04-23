@@ -41,6 +41,7 @@ const productsRouter = require('./routes/products.route');
 const invoicesRouter = require('./routes/invoices.route');
 const citiesRouter = require('./routes/cities.route');
 const categoriesRouter = require('./routes/categories.route');
+const administratorsRouter = require('./routes/administrators.route');
 // const uploadsRouter = require('./routes/uploads.route');
 
 // View engine setup...
@@ -61,6 +62,7 @@ app.use('/products', productsRouter);
 app.use('/invoices', invoicesRouter);
 app.use('/cities', citiesRouter);
 app.use('/categories', categoriesRouter);
+app.use('/administrators', administratorsRouter);
 // app.use('/uploads', uploadsRouter);
 
 // Catch 404 and forward to error handler...

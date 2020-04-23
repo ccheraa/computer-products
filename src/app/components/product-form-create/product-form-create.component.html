@@ -27,7 +27,7 @@
 
         <mat-form-field>
           <mat-label>Definition</mat-label>
-          <textarea matInput placeholder="Ex. 100 Main St" formControlName="definition">1600 Amphitheatre Pkwy</textarea>
+          <textarea matInput placeholder="Ex. 100 Main St" formControlName="definition" maxlength="50">1600 Amphitheatre Pkwy</textarea>
           <mat-error>Definition is required</mat-error>
         </mat-form-field>
       </div>
@@ -46,6 +46,8 @@
           <!-- <input type="file" name="image" id="imageUrl" (change)="uploadImage($event)" formControlName="imageUrl"> -->
           <!-- <img *ngIf="imageUrl" [src]="imageUrl" [alt]="imageUrl" style="max-width:60px;"> -->
           <input type="file" name="file" id="file" (change)="uploadImage($event)" formControlName="file">
+          <mat-icon matSuffix *ngIf="upload" style="position: relative;top: 6px;left: 6px;">cloud_upload</mat-icon>
+          <mat-icon matSuffix *ngIf="uploadOff" style="position: relative;top: 6px;left: 6px;">cloud_off</mat-icon>
         </div>
 
         <div class="button-row">

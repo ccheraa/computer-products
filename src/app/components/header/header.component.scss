@@ -13,6 +13,10 @@ a {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   transition: all 1s;
 }
+a.disabled {
+  color: gray;
+  cursor: not-allowed;
+}
 
 .header {
   padding: 0;
@@ -39,6 +43,10 @@ a {
       &.signin {
         position: absolute;
         right: 0;
+      }
+      &.admin {
+        // pointer-events: none;
+        // cursor: default;
       }
       &:hover {
         box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
