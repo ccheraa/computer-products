@@ -62,7 +62,7 @@ export class ProductFormCreateComponent implements OnInit {
           this.onClose();
         },
         () => {
-          this.notification.warn('Failed to add Product !');
+          this.notification.warn('Failed to add Product!');
         }
       );
     }
