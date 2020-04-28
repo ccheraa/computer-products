@@ -7,7 +7,6 @@ import { UserService } from 'src/app/services/user.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { AdministratorService } from 'src/app/services/administrator.service';
 
-import { AdminAuthorizedUserComponent } from '../admin-authorized-user/admin-authorized-user.component';
 import { AdminUserCreateComponent } from '../admin-user-create/admin-user-create.component';
 import { AdminUserUpdateComponent } from '../admin-user-update/admin-user-update.component';
 

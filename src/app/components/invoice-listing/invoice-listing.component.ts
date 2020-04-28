@@ -25,7 +25,7 @@ export class InvoiceListingComponent implements OnInit, CanActivate {
     'clientCode',
     'productCode',
     'designation',
-    'amount',
+    'quantity',
     'unitPrice',
     'total',
     'date',

@@ -4,7 +4,7 @@ export interface Invoice {
   clientCode: string;
   productCode: string;
   designation: string;
-  amount: number;
+  quantity: number;
   unitPrice: number;
   date: Date;
 }
@@ -29,8 +29,8 @@ export const INPUT_INVOICE_TOP = [
 export const INPUT_INVOICE_BOTTOM = [
   {
     type: 'number',
-    placeholder: 'amount',
-    control: 'amount',
+    placeholder: 'quantity',
+    control: 'quantity',
     icon: 'edit',
     error: 'Amount is required'
   },

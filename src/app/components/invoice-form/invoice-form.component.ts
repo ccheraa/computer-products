@@ -48,7 +48,7 @@ export class InvoiceFormComponent implements OnInit {
       clientCode: new FormControl(null, Validators.required),
       productCode: new FormControl(null, Validators.required),
       designation: new FormControl(null, Validators.required),
-      amount: new FormControl(null, Validators.required),
+      quantity: new FormControl(null, Validators.required),
       unitPrice: new FormControl(null, Validators.required),
       date: new FormControl(null, Validators.required),
     });

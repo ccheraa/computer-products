@@ -19,7 +19,7 @@ const invoiceSchema = new Schema(
       type: String,
       required: false
     },
-    amount: {
+    quantity: {
       type: Number,
       required: false
     },

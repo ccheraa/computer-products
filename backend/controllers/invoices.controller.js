@@ -43,9 +43,10 @@ exports.addInvoice = async (req, res) => {
   const clientCode = req.body.clientCode;
   const productCode = req.body.productCode;
   const designation = req.body.designation;
-  const amount = Number(req.body.amount);
+  // const amount = Number(req.body.amount);
+  const quantity = Number(req.body.quantity);
   const unitPrice = Number(req.body.unitPrice);
-  const total = parseInt(req.body.amount) * parseInt(req.body.unitPrice);
+  const total = parseInt(req.body.quantity) * parseInt(req.body.unitPrice);
   const date = Date.parse(req.body.date);
 
   const newInvoice = new Invoice({
@@ -53,7 +54,7 @@ exports.addInvoice = async (req, res) => {
     clientCode,
     productCode,
     designation,
-    amount,
+    quantity,
     unitPrice,
     total,
     date,
@@ -86,9 +87,10 @@ exports.updateInvoice = (req, res) => {
       invoice.clientCode = req.body.clientCode;
       invoice.productCode = req.body.productCode;
       invoice.designation = req.body.designation;
-      invoice.amount = Number(req.body.amount);
+      // invoice.amount = Number(req.body.amount);
+      invoice.quantity = Number(req.body.quantity);
       invoice.unitPrice = Number(req.body.unitPrice);
-      invoice.total = parseInt(req.body.amount) * parseInt(req.body.unitPrice);
+      invoice.total = parseInt(req.body.quantity) * parseInt(req.body.unitPrice);
       invoice.date = Date.parse(req.body.date);
 
       let promise = invoice.save();
