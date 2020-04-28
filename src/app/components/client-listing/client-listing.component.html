@@ -51,10 +51,15 @@
         <mat-cell *matCellDef="let client"> {{client.gender}} </mat-cell>
       </ng-container>
 
-        <ng-container matColumnDef="city">
+      <ng-container matColumnDef="city">
         <mat-header-cell *matHeaderCellDef> City </mat-header-cell>
         <mat-cell *matCellDef="let client"> {{client.city}} </mat-cell>
       </ng-container>
+
+      <!-- <ng-container matColumnDef="creation">
+        <mat-header-cell *matHeaderCellDef> Creation </mat-header-cell>
+        <mat-cell *matCellDef="let client"> {{client.hireDate | date}} </mat-cell>
+      </ng-container> -->
 
       <ng-container matColumnDef="action">
         <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
