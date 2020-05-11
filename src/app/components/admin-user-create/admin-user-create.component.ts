@@ -48,7 +48,7 @@ export class AdminUserCreateComponent implements OnInit {
 
   initFormAuthorized() {
     this.userAuthorizedForm = this.formBuilder.group({
-      user_authorized: ['', Validators.required],
+      user_create: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
@@ -62,13 +62,16 @@ export class AdminUserCreateComponent implements OnInit {
 
   onAuthorizedUser() {
     if (this.userAuthorizedForm.valid) {
-      if (this.userAuthorizedForm.value.user_authorized === 'q') {
-        this.user.statusOn = 'none';
-        this.user.statusOff = 'block';
-        this.title = 'Create user';
-      } else {
-        this.notification.warn('Unauthorized user!');
-      }
+       this.admin.userAuthorized(this.userAuthorizedForm.value).subscribe(
+        () => {
+          this.user.statusOn = 'none';
+          this.user.statusOff = 'block';
+          this.title = 'Create user';
+        },
+        () => {
+          this.notification.warn('Unauthorized user !');
+        }
+      );
     }
   }
 
