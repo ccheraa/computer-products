@@ -20,7 +20,6 @@ export class ProductFormCreateComponent implements OnInit {
   inputRowBottom = INPUT_ROW_BOTTOM;
   upload: boolean;
   uploadOff: boolean;
-  imageUrl = '';
 
   constructor(
     private dialogRef: MatDialogRef<ProductFormCreateComponent>,
@@ -41,6 +40,7 @@ export class ProductFormCreateComponent implements OnInit {
       category: [''],
       quantity: [''],
       price: [''],
+      imageUrl: [''],
     });
   }
 
@@ -55,10 +55,7 @@ export class ProductFormCreateComponent implements OnInit {
 
   onCreateProduct() {
     if (this.productCreateForm.valid) {
-      this.product.createProduct({
-        ...this.productCreateForm.value,
-        imageUrl: this.imageUrl,
-      }).subscribe(
+      this.product.createProduct(this.productCreateForm.value).subscribe(
         (data) => {
           this.productCreateForm.reset();
           this.notification.success('Product add');
@@ -83,7 +80,10 @@ export class ProductFormCreateComponent implements OnInit {
     // );
     this.product.uploadPhoto(event.target.files[0]).subscribe(
       (data: any) => {
-        this.imageUrl = data.imageUrl;
+        this.productCreateForm.setValue({
+          ...this.productCreateForm.value,
+          imageUrl: data.imageUrl,
+        });
         this.upload = true;
         this.uploadOff = false;
         // this.notification.success('File uploaded.');
