@@ -53,7 +53,9 @@
 
       <ng-container matColumnDef="photo">
         <mat-header-cell *matHeaderCellDef> Photo </mat-header-cell>
-        <mat-cell *matCellDef="let product"> {{ product.file }} </mat-cell>
+        <mat-cell *matCellDef="let product">
+          <img src="{{product.imageUrl}}" alt="">
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="action">

@@ -38,7 +38,7 @@ exports.addProduct = (req, res) => {
   const category = req.body.category.name;
   const quantity = Number(req.body.quantity);
   const price = Number(req.body.price);
-  const file = req.body.file;
+  const imageUrl = req.body.imageUrl;
 
   const newProduct = new Product({
     productCode,
@@ -46,7 +46,7 @@ exports.addProduct = (req, res) => {
     category,
     quantity,
     price,
-    file,
+    imageUrl,
   });
 
   newProduct.save()
@@ -63,6 +63,7 @@ exports.updateProduct = (req, res) => {
       product.category = req.body.category;
       product.quantity = Number(req.body.quantity);
       product.price = Number(req.body.price);
+      product.imageUrl = req.body.imageUrl;
 
       let promise = product.save();
       promise.then(
@@ -98,7 +99,7 @@ exports.deleteProduct = (req, res) => {
 exports.uploadFile = (req, res) => {
   if (typeof req.file !== 'undefined') {
     res.json({
-      imageUrl: 'http://localhost:3000/files/' + req.file.filename
+      imageUrl: 'http://localhost:3000/images/' + req.file.filename
     });
   }
 };
